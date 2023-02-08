@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .container {
+    @apply py-4 sm:px-10 max-w-7xl w-full;
+  }
+  /* Global Custom Classes */
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .flex-start {
+    @apply flex justify-start items-center;
+  }
+  
+  .flex-col-between {
+    @apply flex flex-col justify-between items-stretch;
+  }
+
+  /* Table */
+  .icon {
+    @apply w-7 h-7 p-1;
+  }
+  .table-icon {
+    @apply rounded shadow cursor-pointer hover:shadow-md;
+  }
+  /* Input Field */
+  .input-field {
+    @apply w-full flex-col-between mb-1;
+  }
+  .input-field label {
+    @apply font-semibold mb-1;
+  }
+  .input-field input,
+  .input-field select,
+  .input-field textarea {
+    @apply rounded border p-2 outline-none ring-amber-500 focus:ring-1 transition duration-300;
+  }
+  .input-field p {
+    @apply text-sm text-red-500;
+  }
+
+
+   /* CSS of the App */
+   
+  .card {
+    @apply block rounded-lg border border-gray-200 shadow-md;
+  }
+  .primary-button {
+    @apply bg-amber-400 p-2 shadow rounded outline-none hover:bg-amber-500 active:bg-amber-600 
+  }
+  
+}
+
+
+#__next {
+    @apply min-h-screen flex flex-col;
+}
+
+/* Global Custom Tags */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
