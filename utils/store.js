@@ -9,6 +9,40 @@ function reducer(state, action) {
             return addToCart(state, action.payload);
         case 'REMOVE_FROM_CART':
             return removeFromCart(state, action.payload);
+        case 'RESET_CART':
+            return {
+                ...state,
+                cart: {
+                    cartItems: [],
+                    shippingAddress : { location: {} },
+                    paymentMethod: ''
+                }
+            }
+        case 'RESET_CART_ITEMS':
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    cartItems: []
+                }
+            }
+        case 'ADD_SHIPPING_ADDRESS':
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    shippingAddress : { ...state.cart.shippingAddress, ...action.payload }
+                }
+            }
+        
+        case 'ADD_PAYMENT_METHOD':
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    paymentMethod: action.payload
+                }
+            }
         default:
             return state;
     }
@@ -17,7 +51,8 @@ function reducer(state, action) {
 const store = createContext();
 const initState = {
     cart: Cookies.get('cart')? 
-            JSON.parse(Cookies.get('cart')) : { cartItems: [] }
+            JSON.parse(Cookies.get('cart')) 
+            : { cartItems: [], shippingAddress: {} }
 }
 
 

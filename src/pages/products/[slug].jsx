@@ -1,15 +1,19 @@
-import { useRouter } from "next/router"
-import data from "utils/data";
+import axios from "axios";
 
 import Layout from "components/layout";
-import Error from "../404";
+import MessagePage from "components/MessagePage";
 import ProductDetails from "components/products/ProductDetails";
+import Link from "next/link";
 
-export default function Product() {
-    const { query: { slug } } = useRouter();
-    const product = data.products.find(x => x.slug == slug);
+export default function Product({ product }) {
+    if(!product)
+        return (
+            <MessagePage title='Not Found'>
+                <h1 className="text-4xl mb-2">Product Not Found</h1>
+                <Link href='/' className="primary-button">Continue Shipping</Link>
+            </MessagePage>
+        )
 
-    if(!product) return <Error />
     return (
         <Layout title={product.title}>
             <section>
@@ -22,19 +26,20 @@ export default function Product() {
 }
 
 
-// export async function getServerSideProps(context) {
-//     const res = await getReq(`/getUrl`, 'content', context);
-//     switch (res.url) {
-//         case 'checkout': {
-//             return {
-//                 props: {
-//                     //my other props
-//                 },
-//             };
-//         }
-//         default:
-//             return {
-//                 notFound: true
-//             };
-//     }
-// }
+export async function getStaticPaths() {
+    const { docs } = await axios.get('/products').then(res => res.data);
+    const paths = docs && docs.map(product => ({
+        params: { slug: product.slug }
+    }));
+    return {
+        paths: paths,
+        fallback: 'blocking'
+    }
+  }
+export async function getStaticProps(context) {
+    const { doc } = await axios.get(`/products/${context.params.slug}`).then(res => res.data);
+    return {
+        props: { product: doc },
+        revalidate: 100
+    }
+}

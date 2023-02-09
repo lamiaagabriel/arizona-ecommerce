@@ -1,16 +1,49 @@
 import Link from "next/link";
+import axios from "axios";
+import { hashSync } from "bcryptjs";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { getError } from "utils/error";
+import { signIn } from "next-auth/react";
 
 import Layout from "components/layout";
+
 export default function Register() {
+    const router = useRouter();
+    const { redirect } = router;
+
     const {
         handleSubmit,
         register,
-        formState: { errors }
+        formState: { errors },
+        getValues
     } = useForm();
 
-    const submitHandler = () => {
-
+    const submitHandler = async ({ firstName, lastName, email, password }) => {
+        try {
+            await axios.post('/users', {
+                name: firstName + " " + lastName,
+                email,
+                password: hashSync(password)
+            });
+            const result = await signIn('credentials', {
+                redirect: false,
+                email,
+                password
+            });
+            
+            if(result.error) {
+                console.log(result.error)
+                toast.error(getError(result.error));
+                return;
+            }
+            console.log("passed")
+            router.push('/');
+        } catch (err) {
+            console.log(err)
+            toast.error(getError(err));
+        }
     }
   return (
     <Layout title='Register' className='flex flex-col'>
@@ -50,12 +83,12 @@ export default function Register() {
                             <label>Email</label>
                             <input type="text" autoFocus { 
                                 ...register('email', { 
-                                    required: 'Email is required' ,
+                                    required: 'Email is required',
                                     pattern: {
                                         value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9.-]+$/i,
                                         message: 'Please, Enter a valid email'
                                     }
-                                })} 
+                                })}
                             />
                             <p className={!errors.email && 'pb-5'}>{errors.email?.message}</p>
                         </div>
@@ -72,8 +105,20 @@ export default function Register() {
                             />
                             <p className={!errors.password && 'pb-5'}>{errors.password?.message}</p>
                         </div>
+                        <div className="input-field">
+                            <label>Confirm Password</label>
+                            <input type="password" {
+                                ...register('confirmPassword', { 
+                                    required: 'Confirm Password is required' ,
+                                    validate: (value) => value === getValues('password')
+                                })}
+                            />
+                            <p className={!errors.confirmPassword && 'pb-5'}>{errors.confirmPassword?.type === 'validate'? 'Password doesn\'t match': errors.confirmPassword?.message}</p>
+                        </div>
                         <button type="submit" className="w-full mt-5 primary-button">Register</button>
-                        <p className="text-center text-sm mt-4">Already have an accout? <Link href='/auth/login' className="font-semibold">Login</Link></p>
+                        <p className="text-center text-sm mt-4">Already have an accout? 
+                            <Link href={`/auth/login${redirect? `?redirect=${redirect}` : ''}`}  className="font-semibold"> Login</Link>
+                        </p>
                     </div>
                 </form>
             </div>

@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 const connection = {};
 
 async function connect() {
-    mongoose.set('strictQuery', true);
+    // false: could save any other fields than the schema's
+    mongoose.set('strictQuery', false);
     if(connection.isConnected) {
         console.log("Aleady Connected");
         return;
