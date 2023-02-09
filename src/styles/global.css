@@ -53,6 +53,9 @@
   .primary-button {
     @apply bg-amber-400 p-2 shadow rounded outline-none hover:bg-amber-500 active:bg-amber-600 
   }
+  .cancel-button {
+    @apply bg-gray-300 p-2 shadow rounded outline-none hover:bg-gray-400 active:bg-gray-500;
+  }
   
 }
 

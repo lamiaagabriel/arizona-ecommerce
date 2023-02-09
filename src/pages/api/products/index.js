@@ -1,17 +1,15 @@
-import User from "models/User";
-import { createDoc, findDocs } from "utils/controllers";
-
+import Product from "models/Product";
+import { findDocs } from "utils/controllers";
 
 export default async function handler(req, res) {
   switch (req.method) {
     case "GET":
-        res.json(await findDocs(User, {}));
-        break;
+        res.json(await findDocs(Product, {}));
+      break;
 
-    case "POST":
-        if(req.body)
-          res.json(await createDoc(User, req.body));
-        break;
+    // case "POST":
+    //   if(req.body) res.json(await createDoc(Product, req.body));
+    //   break;
 
     // case "PUT":
     //   if(Object.keys(req.query).length && isValidObjectId(req.query.slug))

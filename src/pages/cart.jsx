@@ -89,14 +89,15 @@ function Cart() {
                             </tbody>
                         </table>
                     </div>
-                    <div>
+                    <div className='flex-col-between gap-4'>
                         <div className="card">
                             <div className="w-full [&>p]:flex-between p-2">
                                 <p>Items: <span>{cartItems.reduce((acc, item) => acc + item.quantity, 0)}</span></p>
                                 <p>Subtotal: <span>${cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0)}</span></p>
-                                <button className='w-full mt-2 primary-button' onClick={() => router.push('auth/login?redirect=/checkout')}>Checkout</button>
+                                <button className='w-full mt-2 primary-button' onClick={() => router.push('auth/login?redirect=/shipping')}>Checkout</button>
                             </div>
                         </div>
+                        <Link href='/orders' className='w-full text-center mt-2 primary-button'>View Orders</Link>
                     </div>
                 </div>
             </div>

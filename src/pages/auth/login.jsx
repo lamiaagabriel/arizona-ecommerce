@@ -72,7 +72,9 @@ export default function Login() {
                             <p>{errors.password?.message}</p>
                         </div>
                         <button type="submit" className="w-full mt-5 primary-button">Login</button>
-                        <p className="text-center text-sm mt-4">Don't have an accout? <Link href='/auth/register' className="font-semibold">Register</Link></p>
+                        <p className="text-center text-sm mt-4">Don't have an accout? 
+                            <Link href={`/auth/register${redirect? `?redirect=${redirect}` : ''}`} className="font-semibold">  Register</Link>
+                        </p>
                     </div>
                 </form>
             </div>
