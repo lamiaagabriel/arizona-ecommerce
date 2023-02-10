@@ -19,7 +19,7 @@ export default function Orders({ docs }) {
     }
     
     const cancelOrderHandler = async(id) => {
-        const result = await axios.delete('/orders/' + id);
+        const result = await axios.delete('http://localhost:3000/api/orders/' + id);
 
         if(!result.errors)
             router.reload();
@@ -68,30 +68,8 @@ export default function Orders({ docs }) {
 Orders.auth = true;
 
 export async function getServerSideProps() {
-    const { data: { docs } } = await axios.get('/orders');
+    const { data: { docs } } = await axios.get('http://localhost:3000/api/orders');
     return {
       props: { docs }
     }
 }
-
-// {docs[0].items.map(product => (
-//     <tr key={product.slug}>
-//         <td>
-//             <Link href={'/products/' + product.slug}>
-//                 <div className='flex-start gap-4'>
-//                     <Image
-//                         src={product.image}
-//                         alt={product.title}
-//                         width={1000}
-//                         height={1000}
-//                         className='w-16 h-16 object-cover object-center'
-//                     />
-//                     {product.title}
-//                 </div>
-//             </Link>
-//         </td>
-//         <td>{product.quantity}</td>
-//         <td>${product.price}</td>
-//         <td>${product.price * product.quantity}</td>
-//     </tr>
-// ))}

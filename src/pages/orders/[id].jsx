@@ -16,7 +16,7 @@ export default function Order({ order }) {
             </MessagePage>
         )
     const cancelOrderHandler = async() => {
-        const result = await axios.delete('/orders/' + order._id);
+        const result = await axios.delete('http://localhost:3000/api/orders/' + order._id);
         console.log(result);
         if(!result.errors) router.replace('/orders');
     }
@@ -111,7 +111,7 @@ Order.auth = true;
 
 
 export async function getStaticPaths() {
-    const { docs } = await axios.get('/orders').then(res => res.data);
+    const { docs } = await axios.get('http://localhost:3000/api/orders').then(res => res.data);
     const paths = docs && docs.map(order => ({
         params: { id: order._id }
     }));
@@ -121,7 +121,7 @@ export async function getStaticPaths() {
     }
   }
 export async function getStaticProps(context) {
-    const { doc } = await axios.get(`/orders/${context.params.id}`).then(res => res.data);
+    const { doc } = await axios.get(`http://localhost:3000/api/orders/${context.params.id}`).then(res => res.data);
     return {
         props: { order: doc },
         revalidate: 10

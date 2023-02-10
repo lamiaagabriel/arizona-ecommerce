@@ -22,7 +22,7 @@ export default function Register() {
 
     const submitHandler = async ({ firstName, lastName, email, password }) => {
         try {
-            await axios.post('/users', {
+            await axios.post('http://localhost:3000/api/users', {
                 name: firstName + " " + lastName,
                 email,
                 password: hashSync(password)

@@ -20,7 +20,7 @@ export default function PlaceOrder() {
     const totalPrice = itemsPrice + shippingPrice + taxPrice;
     
     const placeOrderHandler = async () => {
-        const { data: { _id } } = await axios.post('/orders', {
+        const { data: { _id } } = await axios.post('http://localhost:3000/api/orders', {
             user: session._id,
             items: cartItems,
             shippingAddress,

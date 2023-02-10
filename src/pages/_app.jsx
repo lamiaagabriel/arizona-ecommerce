@@ -2,7 +2,6 @@ import '@/styles/global.css';
 import { SessionProvider, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import StoreProvider from 'utils/store';
-import './api/axios.js'
 
 function Auth({ children }) {
   const router = useRouter();

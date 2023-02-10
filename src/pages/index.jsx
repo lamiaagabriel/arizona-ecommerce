@@ -15,7 +15,7 @@ export default function Home({ docs }) {
 }
 
 export async function getServerSideProps() {
-  const { data: { docs } } = await axios.get('/products');
+  const { data: { docs } } = await axios.get('http://localhost:3000/api/products');
   return {
     props: { docs }
   }
