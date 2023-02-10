@@ -65,14 +65,14 @@ export default function Login() {
                                     required: 'Password is required' ,
                                     minLength: {
                                         value: 6,
-                                        message: 'Password must be more than 6 characters'
+                                        message: 'Password must be more than 6 characters',
                                     }
                                 })}
                             />
                             <p>{errors.password?.message}</p>
                         </div>
                         <button type="submit" className="w-full mt-5 primary-button">Login</button>
-                        <p className="text-center text-sm mt-4">Don't have an accout? 
+                        <p className="text-center text-sm mt-4">Don&apos;t have an accout? 
                             <Link href={`/auth/register${redirect? `?redirect=${redirect}` : ''}`} className="font-semibold">  Register</Link>
                         </p>
                     </div>

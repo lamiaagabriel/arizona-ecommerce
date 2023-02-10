@@ -2,6 +2,8 @@ import '@/styles/global.css';
 import { SessionProvider, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import StoreProvider from 'utils/store';
+import axios from 'axios';
+axios.defaults.baseURL = 'https://arizona-ecommerce.vercel.app/api';
 
 function Auth({ children }) {
   const router = useRouter();

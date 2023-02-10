@@ -15,8 +15,7 @@ export default function Shipping() {
         handleSubmit,
         register,
         formState: { errors },
-        setValue,
-        getValues
+        setValue
     } = useForm();
 
     useEffect(() => {

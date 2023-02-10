@@ -4,11 +4,8 @@ import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useStore } from "utils/store";
 import Cookies from "js-cookie";
-import { forwardRef } from "react";
-
 
 // NavLink from react-router is a function component that is a specialized version of Link which exposes a innerRef prop for that purpose.
-
 export default function Header() {
   const { status, data: session } = useSession();
 

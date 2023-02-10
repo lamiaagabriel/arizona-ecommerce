@@ -27,12 +27,8 @@ function Cart() {
 
 
     const updateCartHandle = (e, product) => {
-        switch(e.target.name) {
-            case 'quantity':
-                const quantity = Number(e.target.value);
-                updateCartHandler(dispatch, { ...product, quantity });
-                break;
-        }
+        const quantity = Number(e.target.value);
+        updateCartHandler(dispatch, { ...product, quantity });
     }
 
   return (
@@ -97,6 +93,7 @@ function Cart() {
                                 <button className='w-full mt-2 primary-button' onClick={() => router.push('auth/login?redirect=/shipping')}>Checkout</button>
                             </div>
                         </div>
+
                         <Link href='/orders' className='w-full text-center mt-2 primary-button'>View Orders</Link>
                     </div>
                 </div>

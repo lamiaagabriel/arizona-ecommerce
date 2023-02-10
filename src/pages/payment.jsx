@@ -38,7 +38,7 @@ export default function Payment() {
                             <h1 className='font-semibold text-lg pb-4'>Payment Method</h1>
                             {paymentMethods.map((payment, i) => (
                                 <div key={i} className="font-semibold flex-start gap-2">
-                                    <input id={payment} type="radio"  className='w-fit' checked={selected === payment} onChange={e => setSelected(payment)}/>
+                                    <input id={payment} type="radio"  className='w-fit' checked={selected === payment} onChange={() => setSelected(payment)}/>
                                     <label htmlFor={payment}>{payment}</label>
                                 </div>
                             ))}
